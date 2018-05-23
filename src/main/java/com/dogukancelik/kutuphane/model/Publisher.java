@@ -3,6 +3,7 @@ package com.dogukancelik.kutuphane.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,10 +15,15 @@ public class Publisher {
     private String name;
     private String description;
 
+    public Publisher(){
+        this.books = new ArrayList<>();
+    }
+
     @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
     public void addBook(Book book){
+        book.setPublisher(this);
         books.add(book);
     }
 

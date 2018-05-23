@@ -25,4 +25,8 @@ public class Book {
 
     private String isbn;
     private String description;
+
+    public Book(){
+
+    }
 }

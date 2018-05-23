@@ -3,6 +3,7 @@ package com.dogukancelik.kutuphane.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -10,15 +11,20 @@ import java.util.List;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long id;
+    private Long id;
 
-    public String name;
-    public String description;
+    private String name;
+    private String description;
 
     @OneToMany(mappedBy = "author")
     public List<Book> books;
 
+    public Author(){
+        this.books = new ArrayList<>();
+    }
+
     public void addBook(Book book){
+        book.setAuthor(this);
         books.add(book);
     }
 
