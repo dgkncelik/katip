@@ -30,6 +30,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getAllBooks(){
+        return bookRepository.findAll();
+    }
+
+    @Override
     public Book createBook(){
         return bookFactory.createBook();
     }

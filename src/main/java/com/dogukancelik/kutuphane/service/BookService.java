@@ -7,6 +7,8 @@ import com.dogukancelik.kutuphane.model.Publisher;
 import java.util.List;
 
 public interface BookService {
+    List<Book> getAllBooks();
+
     Book createBook();
 
     void deleteBook(Book book);

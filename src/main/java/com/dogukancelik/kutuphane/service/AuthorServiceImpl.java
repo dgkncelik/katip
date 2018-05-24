@@ -6,6 +6,8 @@ import com.dogukancelik.kutuphane.respository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
     private AuthorFactory authorFactory;
@@ -15,6 +17,11 @@ public class AuthorServiceImpl implements AuthorService {
     public AuthorServiceImpl(AuthorFactory authorFactory,AuthorRepository authorRepository){
         this.authorFactory = authorFactory;
         this.authorRepository = authorRepository;
+    }
+
+    @Override
+    public List<Author> getAllAuthor(){
+        return authorRepository.findAll();
     }
 
     @Override

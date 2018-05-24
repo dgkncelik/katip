@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+        <h:form id="bookForm">
+            <p:panel header="Kitap Ekle">
+                <h:panelGrid columns="1">
+                    <p:outputLabel for="name" value="Kitap adi: " />
+                    <p:inputText id="name" value="#{bookController.book.name}" />
+
+                    <p:outputLabel for="subName" value="Kitap alt adi: " />
+                    <p:inputText id="subName" value="#{bookController.book.subName}" />
+
+                    <p:outputLabel for="serieName" value="Seri adi: " />
+                    <p:inputText id="serieName" value="#{bookController.book.seriesName}" />
+
+                    <p:outputLabel for="isbn" value="Isbn: " />
+                    <p:inputText id="isbn" value="#{bookController.book.isbn}" />
+
+                    <p:outputLabel for="description" value="Aciklama: " />
+                    <p:inputText id="description" value="#{bookController.book.description}" />
+
+                    <p:outputLabel for="bookAuthorName" value="Yazar Adi: " />
+                    <p:inputText id="bookAuthorName" value="#{bookController.bookAuthorName}" />
+
+                    <p:outputLabel for="bookPublisherName" value="Yayin evi Adi:: " />
+                    <p:inputText id="bookPublisherName" value="#{bookController.bookPublisherName}" />
+
+                    <h:commandButton value="Save" action="#{bookController.save}" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
