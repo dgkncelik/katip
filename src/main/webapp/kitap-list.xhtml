@@ -14,8 +14,21 @@
                     <f:facet name="header">
                         Basic
                     </f:facet>
-                    #{book.name} (#{book.subName}) @ #{book.seriesName},  [ISBN: #{book.isbn}]  [Yazar:#{book.author.name}]  [Yayinevi:#{book.publisher.name}] <h:commandButton value="Sil" action="#{bookController.delete(book)}" />
+                    #{book.name} (#{book.subName}) @ #{book.seriesName},  [ISBN: #{book.isbn}]  [Yazar:#{book.author.name}]  [Yayinevi:#{book.publisher.name}] <h:commandButton value="Sil" action="#{bookListController.deleteBook(book)}" /> <h:commandButton value="Duzenle" action="#{bookListController.editBook(book)}" />
                 </p:dataList>
+                <h:panelGroup rendered="#{bookListController.edit}">
+                    <h3>Kitabi duzenle #ID:  #{bookListController.book.id}</h3>
+                    <p> Kitap Adi: <p:inputText id="name" value="#{bookListController.book.name}" /></p>
+                    <p>Aciklama: <p:inputText id="description" value="#{bookListController.book.description}" /></p>
+                    <p>Kitap Alt Adi: <p:inputText id="subName" value="#{bookListController.book.subName}" /></p>
+                    <p>Kitap Seri Adi: <p:inputText id="seriesName" value="#{bookListController.book.seriesName}" /></p>
+                    <p>Yazar Adi: <p:inputText id="authorName" value="#{bookListController.authorName}" /></p>
+                    <p>Yayinevi Adi: <p:inputText id="publisherName" value="#{bookListController.publisherName}" /></p>
+                    <p>
+                        <p:commandButton value="save" action="#{bookListController.save}" />
+                        <p:commandButton value="cancel" action="#{bookListController.cancelEdit}" />
+                    </p>
+                </h:panelGroup>
             </p:panel>
         </h:form>
     </ui:define>

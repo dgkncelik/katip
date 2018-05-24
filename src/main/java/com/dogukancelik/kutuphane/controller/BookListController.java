@@ -1,6 +1,7 @@
 package com.dogukancelik.kutuphane.controller;
 import com.dogukancelik.kutuphane.model.Author;
 import com.dogukancelik.kutuphane.model.Book;
+import com.dogukancelik.kutuphane.model.Publisher;
 import com.dogukancelik.kutuphane.service.AuthorService;
 import com.dogukancelik.kutuphane.service.BookService;
 import com.dogukancelik.kutuphane.service.PublisherService;
@@ -27,6 +28,8 @@ public class BookListController {
     private AuthorService authorService;
     private List<Book> bookList;
     private Book book;
+    private String authorName;
+    private String publisherName;
     private boolean edit;
 
     @Autowired
@@ -57,8 +60,14 @@ public class BookListController {
     }
 
     public void save(){
+        Author bookAuthor = authorService.getAuthorByName(this.authorName);
+        Publisher bookPublisher = publisherService.getPublisherByName(this.publisherName);
+        this.book.setPublisher(bookPublisher);
+        this.book.setAuthor(bookAuthor);
         bookService.saveBook(this.book);
         this.book = bookService.createBook();
+        this.authorName = "";
+        this.publisherName = "";
         this.edit = false;
     }
 

@@ -1,5 +1,6 @@
 package com.dogukancelik.kutuphane.controller;
 
+import com.dogukancelik.kutuphane.exception.Conflict;
 import com.dogukancelik.kutuphane.model.Author;
 import com.dogukancelik.kutuphane.service.AuthorService;
 import com.dogukancelik.kutuphane.service.BookService;
@@ -52,12 +53,25 @@ public class AuthorListController {
     }
 
     public void editAuthor(Author author){
+        if(author == null){
+            throw new Conflict("Bu yazar nesnesi duzenlenemez -null object-");
+        }
+
         this.author = author;
         edit = true;
     }
 
     public void save(){
-        authorService.saveAuthor(this.author);
+        if(this.author == null){
+            throw new Conflict("Bu yazar nesnesi kaydedilemez -null object");
+        }
+
+        try {
+            authorService.saveAuthor(this.author);
+        }catch (Exception e){
+            throw new Conflict("Yazar nesnesi kaydedilemedi: " + e.getMessage());
+        }
+
         this.author = authorService.createAuthor();
         this.edit = false;
     }

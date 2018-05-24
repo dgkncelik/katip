@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <p:panel header="Ara">
+                <p>Aranacak Metin: <p:inputText id="searchWord" value="#{searchController.searchWord}" /></p>
+                <h:selectOneMenu value = "#{searchController.searchCategory}">
+                    <f:selectItem itemValue = "KITAPADI" itemLabel = "Kitap adi ile ara" />
+                    <f:selectItem itemValue = "SERIADI" itemLabel = "Kitabin seri adi ile ara" />
+                    <f:selectItem itemValue = "YAZAR" itemLabel = "Yazar adi ile ara" />
+                    <f:selectItem itemValue = "ISBN" itemLabel = "ISBN numarasi ile ara" />
+                </h:selectOneMenu>
+                <h:commandButton value="Ara" action="#{searchController.search}" />
+
+                <h:panelGroup rendered="#{searchController.showResult}">
+                    <p:dataList value="#{searchController.bookList}" var="book" type="ordered">
+                        <f:facet name="header">
+                            Basic
+                        </f:facet>
+                        #{book.name} (#{book.subName}) @ #{book.seriesName},  [ISBN: #{book.isbn}]  [Yazar:#{book.author.name}]  [Yayinevi:#{book.publisher.name}] <h:commandButton value="Sil" action="#{searchController.deleteBook(book)}" /> <h:commandButton value="Duzenle" action="#{searchController.editBook(book)}" />
+                        <h:panelGroup rendered="#{searchController.edit}">
+                            <h3>Kitabi duzenle #ID:  #{book.id}</h3>
+                            <p> Kitap Adi: <p:inputText id="name" value="#{book.name}" /></p>
+                            <p>Aciklama: <p:inputText id="description" value="#{book.description}" /></p>
+                            <p>Kitap Alt Adi: <p:inputText id="subName" value="#{book.subName}" /></p>
+                            <p>Kitap Seri Adi: <p:inputText id="seriesName" value="#{book.seriesName}" /></p>
+                            <p>Yazar Adi: <p:inputText id="authorName" value="#{searchController.authorName}" /></p>
+                            <p>Yayinevi Adi: <p:inputText id="publisherName" value="#{searchController.publisherName}" /></p>
+                            <p>
+                                <p:commandButton value="save" action="#{searchController.saveBook(book)}" />
+                                <p:commandButton value="cancel" action="#{searchController.test}" />
+                            </p>
+                        </h:panelGroup>
+                    </p:dataList>
+                </h:panelGroup>
+
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

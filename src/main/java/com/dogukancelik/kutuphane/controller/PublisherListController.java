@@ -1,5 +1,7 @@
 package com.dogukancelik.kutuphane.controller;
 
+import com.dogukancelik.kutuphane.exception.Conflict;
+import com.dogukancelik.kutuphane.exception.NotFound;
 import com.dogukancelik.kutuphane.model.Publisher;
 import com.dogukancelik.kutuphane.service.AuthorService;
 import com.dogukancelik.kutuphane.service.BookService;
@@ -47,17 +49,40 @@ public class PublisherListController {
     }
 
     public String deletePublisher(Publisher deletePublisher){
-        publisherService.deletePublisher(deletePublisher);
+        if(deletePublisher == null){
+            throw new Conflict("BU yayinevi kaydedilemez -null object-");
+        }
+
+        try {
+            publisherService.deletePublisher(deletePublisher);
+        }catch (Exception e){
+            throw new Conflict("Yayinevi servisi bir hata ile karsilasti: " + e.getMessage());
+        }
+
         return "/yayinevi-list.xhtml?faces-redirect=true";
     }
 
     public void editPublisher(Publisher publisher){
+        if(publisher == null){
+            throw new Conflict("Bu yayin evi duzenlenemez -null object");
+        }
+
         this.publisher = publisher;
         edit = true;
     }
 
     public void save(){
-        publisherService.savePublisher(this.publisher);
+        if(this.publisher == null){
+            throw new Conflict("Bu yayinevi kaydedilemez -null object-");
+        }
+
+        try {
+            publisherService.savePublisher(this.publisher);
+        }catch (Exception e){
+            throw new Conflict("Yayinevi kaydeilemedi: " + e.getMessage());
+        }
+
+
         this.publisher = publisherService.createPublisher();
         edit = false;
     }

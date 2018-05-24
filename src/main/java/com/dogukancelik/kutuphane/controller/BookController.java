@@ -1,4 +1,6 @@
 package com.dogukancelik.kutuphane.controller;
+import com.dogukancelik.kutuphane.exception.Conflict;
+import com.dogukancelik.kutuphane.exception.NotFound;
 import com.dogukancelik.kutuphane.model.Author;
 import com.dogukancelik.kutuphane.model.Book;
 import com.dogukancelik.kutuphane.model.Publisher;
@@ -38,12 +40,37 @@ public class BookController {
     }
 
     public String save(){
-        Author author = authorService.getAuthorByName(this.bookAuthorName);
-        Publisher publisher = publisherService.getPublisherByName(this.bookPublisherName);
+        Author author;
+        Publisher publisher;
+
+        try {
+            author = authorService.getAuthorByName(this.bookAuthorName);
+            if(author == null){
+                throw new NotFound(this.bookAuthorName + "ismine sahip bir yazar bulunamadi");
+            }
+        }catch (Exception e){
+            throw new Conflict("Yazar servisi bi hata ile karsilasti: " + e.getMessage());
+        }
+
+
+        try {
+            publisher = publisherService.getPublisherByName(this.bookPublisherName);
+            if(publisher == null){
+                throw new NotFound(this.bookPublisherName + "ismina sahip bir yayinevi bulunamadi");
+            }
+        }catch (Exception e){
+            throw new Conflict("Yazar servisi bir hata ile karsilasti");
+        }
+
         book.setAuthor(author);
         book.setPublisher(publisher);
 
-        bookService.saveBook(book);
+        try {
+            bookService.saveBook(book);
+        }catch (Exception e){
+            throw new Conflict("Kitap kaydedilemedi: " + e.getMessage());
+        }
+
         this.book = bookService.createBook();
         this.bookAuthorName = "";
         this.bookPublisherName = "";
@@ -51,7 +78,11 @@ public class BookController {
     }
 
     public String delete(Book deleteBook){
-        bookService.deleteBook(deleteBook);
+        try {
+            bookService.deleteBook(deleteBook);
+        }catch (Exception e){
+            throw new Conflict("Kitap silinemedi: " + e.getMessage());
+        }
         return "/kitap-list.xhtml?faces-redirect=true";
     }
 
