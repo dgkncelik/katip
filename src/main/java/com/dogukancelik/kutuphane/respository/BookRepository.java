@@ -6,21 +6,20 @@ import com.dogukancelik.kutuphane.model.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Optional<Book> findById(String name);
+    Book findByName(String name);
 
-    Optional<Book> findByName(String name);
+    Book findBySubName(String name);
 
-    Optional<Book> findBySubName(String name);
+    List<Book> findBySeriesName(String name);
 
-    Optional<Book> findBySeriesName(String name);
+    List<Book> findByAuthor(Author author);
 
-    Optional<Book> findByAuthor(Author author);
+    List<Book> findByPublisher(Publisher publisher);
 
-    Optional<Book> findByPublisher(Publisher publisher);
-
-    Optional<Book> findByIsbn(String isbn);
+    Book findByIsbn(String isbn);
 }

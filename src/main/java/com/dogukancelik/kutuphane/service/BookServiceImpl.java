@@ -56,57 +56,51 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(Long id){
-        return bookRepository.findById(id).get();
+        if(bookRepository.findById(id).isPresent()){
+            return bookRepository.findById(id).get();
+        }
+
+        return null;
     }
 
     @Override
     public Book getBookByName(String name){
-        return bookRepository.findByName(name).get();
+        return bookRepository.findByName(name);
     }
 
     @Override
     public Book getBookBySubName(String subName){
-        return bookRepository.findBySubName(subName).get();
+        return bookRepository.findBySubName(subName);
     }
 
     @Override
     public List<Book> getBooksBySeriesName(String seriesName){
-        ArrayList<Book> result = new ArrayList<>();
-        bookRepository.findBySeriesName(seriesName).ifPresent(result::add);
-        return result;
+       return bookRepository.findBySeriesName(seriesName);
     }
 
     @Override
     public List<Book> getBooksByAuthor(Author author){
-        ArrayList<Book> result = new ArrayList<>();
-        bookRepository.findByAuthor(author).ifPresent(result::add);
-        return result;
+        return bookRepository.findByAuthor(author);
     }
 
     @Override
     public List<Book> getBooksByAuthorName(String authorName){
-        ArrayList<Book> result = new ArrayList<>();
-        bookRepository.findByAuthor(authorService.getAuthorByName(authorName)).ifPresent(result::add);
-        return result;
+        return bookRepository.findByAuthor(authorService.getAuthorByName(authorName));
     }
 
     @Override
     public List<Book> getBooksByPublisherName(String publisherName){
-        ArrayList<Book> result = new ArrayList<>();
-        bookRepository.findByPublisher(publisherService.getPublisherByName(publisherName)).ifPresent(result::add);
-        return result;
+        return bookRepository.findByPublisher(publisherService.getPublisherByName(publisherName));
     }
 
     @Override
     public List<Book> getBooksByPublisher(Publisher publisher){
-        ArrayList<Book> result = new ArrayList<>();
-        bookRepository.findByPublisher(publisher).ifPresent(result::add);
-        return result;
+        return bookRepository.findByPublisher(publisher);
     }
 
     @Override
     public Book getBookByIsbn(String isbn){
-        return bookRepository.findByIsbn(isbn).get();
+        return bookRepository.findByIsbn(isbn);
     }
 
 }

@@ -46,11 +46,15 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getAuthorById(Long id){
-       return authorRepository.findById(id).get();
+       if(authorRepository.findById(id).isPresent()){
+           return authorRepository.findById(id).get();
+       }
+
+       return null;
     }
 
     @Override
     public Author getAuthorByName(String name){
-        return authorRepository.findByName(name).get();
+        return authorRepository.findByName(name);
     }
 }
