@@ -1,5 +1,6 @@
 package com.dogukancelik.kutuphane.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Author {
 
     private String name;
     private String description;
+
 
     @OneToMany(mappedBy = "author")
     public List<Book> books;
@@ -34,5 +36,10 @@ public class Author {
                 books.remove(b);
             }
         }
+    }
+
+    @Override
+    public String toString(){
+        return "";
     }
 }

@@ -1,5 +1,6 @@
 package com.dogukancelik.kutuphane.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Book {
     private String subName;
     private String seriesName;
 
+
     @ManyToOne
     @JoinColumn(name="author_id")
     private Author author;
@@ -28,5 +30,10 @@ public class Book {
 
     public Book(){
 
+    }
+
+    @Override
+    public String toString(){
+        return "";
     }
 }

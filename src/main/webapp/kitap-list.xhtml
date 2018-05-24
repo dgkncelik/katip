@@ -14,7 +14,7 @@
                     <f:facet name="header">
                         Basic
                     </f:facet>
-                    #{book.name}, #{book.subName}, #{book.seriesName}, ISBN: #{book.isbn}
+                    #{book.name} (#{book.subName}) @ #{book.seriesName},  [ISBN: #{book.isbn}]  [Yazar:#{book.author.name}]  [Yayinevi:#{book.publisher.name}] <h:commandButton value="Sil" action="#{bookController.delete(book)}" />
                 </p:dataList>
             </p:panel>
         </h:form>

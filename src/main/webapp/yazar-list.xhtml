@@ -14,9 +14,19 @@
                     <f:facet name="header">
                         Basic
                     </f:facet>
-                    #{author.name}, #{author.description}
+                    #{author.name}, #{author.description} <h:commandButton value="Sil" action="#{authorListController.deleteAuthor(author)}" /> <h:commandButton value="Duzenle" action="#{authorListController.editAuthor(author)}" />
                 </p:dataList>
+                <h:panelGroup rendered="#{authorListController.edit}">
+                    <h3>Yazari duzenle #ID:  #{authorListController.author.id}</h3>
+                        <p>Yazar Adi: <p:inputText id="name" value="#{authorListController.author.name}" /></p>
+                        <p>Aciklama: <p:inputText id="description" value="#{authorListController.author.description}" /></p>
+                        <p>
+                            <p:commandButton value="save" action="#{authorListController.save}" />
+                            <p:commandButton value="cancel" action="#{authorListController.cancelEdit}" />
+                        </p>
+                </h:panelGroup>
             </p:panel>
+
         </h:form>
     </ui:define>
 </ui:composition>

@@ -50,4 +50,9 @@ public class BookController {
         return "/kitap-list.xhtml?faces-redirect=true";
     }
 
+    public String delete(Book deleteBook){
+        bookService.deleteBook(deleteBook);
+        return "/kitap-list.xhtml?faces-redirect=true";
+    }
+
 }

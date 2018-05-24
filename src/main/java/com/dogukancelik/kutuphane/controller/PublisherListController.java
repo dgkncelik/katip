@@ -26,6 +26,9 @@ public class PublisherListController {
     private PublisherService publisherService;
     private AuthorService authorService;
     private List<Publisher> publisherList;
+    private Publisher publisher;
+    private boolean edit;
+
 
     @Autowired
     public PublisherListController(BookService bookService,
@@ -34,7 +37,6 @@ public class PublisherListController {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
-
     }
 
     @Deferred
@@ -42,6 +44,26 @@ public class PublisherListController {
     @IgnorePostback
     public void loadData() {
         this.publisherList = publisherService.getAllPublisher();
+    }
+
+    public String deletePublisher(Publisher deletePublisher){
+        publisherService.deletePublisher(deletePublisher);
+        return "/yayinevi-list.xhtml?faces-redirect=true";
+    }
+
+    public void editPublisher(Publisher publisher){
+        this.publisher = publisher;
+        edit = true;
+    }
+
+    public void save(){
+        publisherService.savePublisher(this.publisher);
+        this.publisher = publisherService.createPublisher();
+        edit = false;
+    }
+
+    public void cancelEdit(){
+        edit = false;
     }
 
 }

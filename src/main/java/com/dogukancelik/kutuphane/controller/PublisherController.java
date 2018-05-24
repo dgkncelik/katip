@@ -38,5 +38,8 @@ public class PublisherController {
         return "/yayinevi-list.xhtml?faces-redirect=true";
     }
 
-
+    public String delete(Publisher deletePublisher){
+        publisherService.deletePublisher(deletePublisher);
+        return "/yayinevi-list.xhtml?faces-redirect=true";
+    }
 }

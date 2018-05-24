@@ -26,6 +26,9 @@ public class AuthorListController {
     private PublisherService publisherService;
     private AuthorService authorService;
     private List<Author> authorList;
+    private Author author;
+    private boolean edit;
+    private Author beforeEdit = null;
 
     @Autowired
     public AuthorListController(BookService bookService,
@@ -34,7 +37,6 @@ public class AuthorListController {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
-
     }
 
     @Deferred
@@ -43,4 +45,25 @@ public class AuthorListController {
     public void loadData(){
         this.authorList = authorService.getAllAuthor();
     }
+
+    public String deleteAuthor(Author deleteAuthor){
+        authorService.deleteAuthor(deleteAuthor);
+        return "/yazar-list.xhtml?faces-redirect=true";
+    }
+
+    public void editAuthor(Author author){
+        this.author = author;
+        edit = true;
+    }
+
+    public void save(){
+        authorService.saveAuthor(this.author);
+        this.author = authorService.createAuthor();
+        this.edit = false;
+    }
+
+    public void cancelEdit(){
+        edit = false;
+    }
+
 }

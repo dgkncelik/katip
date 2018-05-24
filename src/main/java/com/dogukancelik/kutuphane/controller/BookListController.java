@@ -26,6 +26,8 @@ public class BookListController {
     private PublisherService publisherService;
     private AuthorService authorService;
     private List<Book> bookList;
+    private Book book;
+    private boolean edit;
 
     @Autowired
     public BookListController (BookService bookService,
@@ -42,5 +44,25 @@ public class BookListController {
     @IgnorePostback
     public void loadData(){
          this.bookList = bookService.getAllBooks();
+    }
+
+    public String deleteBook(Book deleteBook){
+        bookService.deleteBook(deleteBook);
+        return "/kitap-list.xhtml?faces-redirect=true";
+    }
+
+    public void editBook(Book book){
+        this.book = book;
+        edit = true;
+    }
+
+    public void save(){
+        bookService.saveBook(this.book);
+        this.book = bookService.createBook();
+        this.edit = false;
+    }
+
+    public void cancelEdit(){
+        edit = false;
     }
 }
