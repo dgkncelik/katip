@@ -1,16 +1,16 @@
 package com.dogukancelik.kutuphane;
 
-import org.ocpsoft.rewrite.servlet.DispatcherType;
+
 import org.ocpsoft.rewrite.servlet.RewriteFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+import javax.servlet.DispatcherType;
 import javax.faces.webapp.FacesServlet;
 import java.util.EnumSet;
 
@@ -31,8 +31,8 @@ public class KutuphaneApplication extends SpringBootServletInitializer {
     @Bean
     public FilterRegistrationBean rewriteFilter() {
         FilterRegistrationBean rwFilter = new FilterRegistrationBean(new RewriteFilter());
-        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, DispatcherType.REQUEST,
-                DispatcherType.ASYNC, DispatcherType.ERROR));
+        rwFilter.setDispatcherTypes(EnumSet.of(DispatcherType.FORWARD, javax.servlet.DispatcherType.REQUEST,
+                javax.servlet.DispatcherType.ASYNC, javax.servlet.DispatcherType.ERROR));
         rwFilter.addUrlPatterns("/*");
         return rwFilter;
     }

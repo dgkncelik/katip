@@ -6,6 +6,9 @@ import com.dogukancelik.kutuphane.respository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PublisherServiceImpl implements PublisherService {
     private PublisherFactory publisherFactory;
@@ -15,6 +18,11 @@ public class PublisherServiceImpl implements PublisherService {
     public PublisherServiceImpl(PublisherFactory publisherFactory, PublisherRepository publisherRepository){
         this.publisherFactory = publisherFactory;
         this.publisherRepository = publisherRepository;
+    }
+
+    @Override
+    public List<Publisher> getAllPublisher(){
+        return publisherRepository.findAll();
     }
 
     @Override
