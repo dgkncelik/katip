@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dogukancelik</groupId>
-    <artifactId>kutuphane</artifactId>
+    <artifactId>katip</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>kutuphane</name>
-    <description>Kutuphane is a project that provides rest api service for storing book&#39;s information in libraries
+    <name>Katip</name>
+    <description>Katip is a project that provides rest api service for storing book&#39;s information in libraries
     </description>
 
     <parent>
