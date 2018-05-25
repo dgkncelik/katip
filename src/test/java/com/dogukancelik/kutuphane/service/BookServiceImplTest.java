@@ -5,7 +5,10 @@ import com.dogukancelik.kutuphane.factory.BookFactory;
 import com.dogukancelik.kutuphane.model.Author;
 import com.dogukancelik.kutuphane.model.Book;
 import com.dogukancelik.kutuphane.model.Publisher;
+import com.dogukancelik.kutuphane.respository.AuthorRepository;
 import com.dogukancelik.kutuphane.respository.BookRepository;
+import com.dogukancelik.kutuphane.respository.PublisherRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +29,12 @@ public class BookServiceImplTest {
     private BookFactory bookFactory;
 
     @Autowired
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+
+    @Autowired
     private BookRepository bookRepository;
 
     @Autowired
@@ -39,6 +48,13 @@ public class BookServiceImplTest {
     @Before
     public void setup(){
         bookService = new BookServiceImpl(bookFactory, bookRepository, authorService, publisherService);
+    }
+
+    @After
+    public void tearDown(){
+        bookRepository.deleteAll();
+        authorRepository.deleteAll();
+        publisherRepository.deleteAll();
     }
 
     @Test

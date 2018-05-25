@@ -11,9 +11,6 @@
         <h:form id="form">
             <p:panel header="Kitap Listesi">
                 <p:dataList value="#{bookListController.bookList}" var="book" type="ordered">
-                    <f:facet name="header">
-                        Basic
-                    </f:facet>
                     #{book.name} (#{book.subName}) @ #{book.seriesName},  [ISBN: #{book.isbn}]  [Yazar:#{book.author.name}]  [Yayinevi:#{book.publisher.name}] <h:commandButton value="Sil" action="#{bookListController.deleteBook(book)}" /> <h:commandButton value="Duzenle" action="#{bookListController.editBook(book)}" />
                 </p:dataList>
                 <h:panelGroup rendered="#{bookListController.edit}">

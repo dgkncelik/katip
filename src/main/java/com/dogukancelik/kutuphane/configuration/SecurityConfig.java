@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import sun.rmi.transport.proxy.HttpReceiveSocket;
+
 
 @Configuration
 @EnableWebSecurity
@@ -18,12 +18,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .permitAll()
                     .failureUrl("/login?error=true")
+                    .successForwardUrl("/")
                 .and()
                     .logout()
                     .permitAll()
             .and()
                 .authorizeRequests()
-                    .antMatchers("/").permitAll()
                     .antMatchers("/kitap-form").hasRole(AuthorizationType.ADMIN.toString())
                     .antMatchers("/yazar-form").hasRole(AuthorizationType.ADMIN.toString())
                     .antMatchers("/yayinevi-form").hasRole(AuthorizationType.ADMIN.toString())

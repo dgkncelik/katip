@@ -4,6 +4,7 @@ import com.dogukancelik.kutuphane.KutuphaneApplication;
 import com.dogukancelik.kutuphane.factory.AuthorFactory;
 import com.dogukancelik.kutuphane.model.Author;
 import com.dogukancelik.kutuphane.respository.AuthorRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,11 @@ public class AuthorServiceImplTest {
     @Before
     public void setup(){
         authorService = new AuthorServiceImpl(authorFactory, authorRepository);
+    }
+
+    @After
+    public void tearDown(){
+        authorRepository.deleteAll();
     }
 
     @Test

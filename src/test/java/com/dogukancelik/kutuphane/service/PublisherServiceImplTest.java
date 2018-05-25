@@ -3,7 +3,10 @@ package com.dogukancelik.kutuphane.service;
 import com.dogukancelik.kutuphane.KutuphaneApplication;
 import com.dogukancelik.kutuphane.factory.PublisherFactory;
 import com.dogukancelik.kutuphane.model.Publisher;
+import com.dogukancelik.kutuphane.respository.AuthorRepository;
+import com.dogukancelik.kutuphane.respository.BookRepository;
 import com.dogukancelik.kutuphane.respository.PublisherRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,13 +23,26 @@ public class PublisherServiceImplTest {
     public PublisherFactory publisherFactory;
 
     @Autowired
-    public PublisherRepository publisherRepository;
+    private AuthorRepository authorRepository;
 
-    public PublisherService publisherService;
+    @Autowired
+    private PublisherRepository publisherRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    private PublisherService publisherService;
 
     @Before
     public void setup(){
         publisherService = new PublisherServiceImpl(publisherFactory, publisherRepository);
+    }
+
+    @After
+    public void tearDown(){
+        bookRepository.deleteAll();
+        authorRepository.deleteAll();
+        publisherRepository.deleteAll();
     }
 
     @Test
@@ -51,7 +67,7 @@ public class PublisherServiceImplTest {
         publisherRepository.save(p2);
 
         publisherService.deletePublisher(p2);
-        assertEquals(publisherRepository.findByName("test2").isPresent(), false);
+        assertFalse(publisherRepository.findByName("test2").isPresent());
     }
 
     @Test
@@ -62,7 +78,7 @@ public class PublisherServiceImplTest {
 
         Long id = publisherRepository.findByName("test3").get().getId();
         publisherService.deletePublisherById(id);
-        assertEquals(publisherRepository.findByName("test3").isPresent(), false);
+        assertFalse(publisherRepository.findByName("test3").isPresent());
     }
 
     @Test

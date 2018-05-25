@@ -62,6 +62,7 @@ public class PublisherListController {
         return "/yayinevi-list.xhtml?faces-redirect=true";
     }
 
+
     public void editPublisher(Publisher publisher){
         if(publisher == null){
             throw new Conflict("Bu yayin evi duzenlenemez -null object");
