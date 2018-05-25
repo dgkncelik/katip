@@ -127,13 +127,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.0.4.RELEASE</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>south-street</artifactId>
-        </dependency>
-
-
     </dependencies>
     <build>
         <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
