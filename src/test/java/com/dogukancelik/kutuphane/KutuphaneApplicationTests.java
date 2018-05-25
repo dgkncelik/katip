@@ -7,6 +7,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+//TODO: implement @after and @afterClass annotations for all test
+
 public class KutuphaneApplicationTests {
 
     @Test

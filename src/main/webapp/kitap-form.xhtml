@@ -3,14 +3,16 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags"
+>
 <ui:composition template="layout.xhtml">
     <ui:define name="content">
         <h:form id="bookForm">
             <p:panel header="Kitap Ekle">
-                <h:panelGrid columns="1">
+                <h:panelGrid>
                     <p:outputLabel for="name" value="Kitap adi: " />
-                    <p:inputText id="name" value="#{bookController.book.name}" />
+                    <p:inputText  id="name" value="#{bookController.book.name}" />
 
                     <p:outputLabel for="subName" value="Kitap alt adi: " />
                     <p:inputText id="subName" value="#{bookController.book.subName}" />
